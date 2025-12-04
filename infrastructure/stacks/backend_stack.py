@@ -34,6 +34,7 @@ class BackendStack(Stack):
             ),
             memory_size=512,
             timeout=Duration.seconds(30),
+            architecture=_lambda.Architecture.ARM_64,  # Match Docker image architecture
             environment={
                 "DYNAMODB_TABLE_NAME": events_table.table_name,
                 "CORS_ORIGINS": "*",  # Configure as needed

@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from typing import List, Optional
 import os
 from dotenv import load_dotenv
+from mangum import Mangum
 
 from models import Event, EventCreate, EventUpdate
 from database import db_client
@@ -138,3 +139,7 @@ def delete_event(event_id: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e)
         )
+
+
+# Lambda handler
+handler = Mangum(app)
