@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events API Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        .module-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .module-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f8f9fa;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .module-card h3 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .module-card a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .module-card a:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .endpoint {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .method {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        .get { background: #61affe; color: white; }
+        .post { background: #49cc90; color: white; }
+        .put { background: #fca130; color: white; }
+        .delete { background: #f93e3e; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Events API Documentation</h1>
+    
+    <div class="info-box">
+        <strong>Base URL:</strong> <code>https://fk20uw7pjj.execute-api.us-west-2.amazonaws.com/prod/</code>
+    </div>
+
+    <h2>API Modules</h2>
+    <div class="module-list">
+        <div class="module-card">
+            <h3>main</h3>
+            <p>FastAPI application with all API endpoints and Lambda handler.</p>
+            <a href="main.html">View Documentation →</a>
+        </div>
+        
+        <div class="module-card">
+            <h3>models</h3>
+            <p>Pydantic models for request/response validation and event schema.</p>
+            <a href="models.html">View Documentation →</a>
+        </div>
+        
+        <div class="module-card">
+            <h3>database</h3>
+            <p>DynamoDB client for CRUD operations on events.</p>
+            <a href="database.html">View Documentation →</a>
+        </div>
+    </div>
+
+    <h2>Quick Reference</h2>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <code>/events</code>
+        <p>List all events. Supports <code>?status=active</code> query parameter for filtering.</p>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <code>/events</code>
+        <p>Create a new event. Supports custom eventId or auto-generates one.</p>
+    </div>
+
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <code>/events/{event_id}</code>
+        <p>Get a specific event by ID.</p>
+    </div>
+
+    <div class="endpoint">
+        <span class="method put">PUT</span>
+        <code>/events/{event_id}</code>
+        <p>Update an existing event. Supports partial updates.</p>
+    </div>
+
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <code>/events/{event_id}</code>
+        <p>Delete an event by ID.</p>
+    </div>
+
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <code>/health</code>
+        <p>Health check endpoint.</p>
+    </div>
+
+    <h2>Event Schema</h2>
+    <div class="info-box">
+        <strong>Properties:</strong>
+        <ul>
+            <li><code>eventId</code> (string) - Unique identifier</li>
+            <li><code>title</code> (string) - Event title (1-200 chars)</li>
+            <li><code>description</code> (string) - Event description (1-1000 chars)</li>
+            <li><code>date</code> (string) - ISO format or YYYY-MM-DD</li>
+            <li><code>location</code> (string) - Event location (1-200 chars)</li>
+            <li><code>capacity</code> (integer) - Max attendees (1-100,000)</li>
+            <li><code>organizer</code> (string) - Organizer name (1-100 chars)</li>
+            <li><code>status</code> (enum) - active, scheduled, ongoing, completed, cancelled</li>
+        </ul>
+    </div>
+
+    <h2>Additional Resources</h2>
+    <ul>
+        <li><a href="https://fk20uw7pjj.execute-api.us-west-2.amazonaws.com/prod/docs" target="_blank">Interactive API Docs (Swagger UI)</a></li>
+        <li><a href="https://fk20uw7pjj.execute-api.us-west-2.amazonaws.com/prod/openapi.json" target="_blank">OpenAPI Schema</a></li>
+    </ul>
+</body>
+</html>

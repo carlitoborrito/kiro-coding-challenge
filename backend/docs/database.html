@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>database API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>database</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="database.DynamoDBClient"><code class="flex name class">
+<span>class <span class="ident">DynamoDBClient</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DynamoDBClient:
+    def __init__(self):
+        self.table_name = os.getenv(&#39;DYNAMODB_TABLE_NAME&#39;, &#39;events&#39;)
+        self.region = os.getenv(&#39;AWS_REGION&#39;, &#39;us-west-2&#39;)
+        
+        # Use local endpoint if specified (for local development)
+        endpoint_url = os.getenv(&#39;DYNAMODB_ENDPOINT_URL&#39;)
+        if endpoint_url:
+            self.dynamodb = boto3.resource(&#39;dynamodb&#39;, endpoint_url=endpoint_url, region_name=self.region)
+        else:
+            self.dynamodb = boto3.resource(&#39;dynamodb&#39;, region_name=self.region)
+        
+        self.table = self.dynamodb.Table(self.table_name)
+
+    def create_event(self, event_data: dict) -&gt; dict:
+        # Use provided eventId or generate new one
+        event_id = event_data.get(&#39;eventId&#39;) or str(uuid.uuid4())
+        item = {
+            &#39;eventId&#39;: event_id,
+            **{k: v for k, v in event_data.items() if k != &#39;eventId&#39;}
+        }
+        
+        try:
+            self.table.put_item(Item=item)
+            return item
+        except ClientError as e:
+            raise Exception(f&#34;Failed to create event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)
+
+    def get_event(self, event_id: str) -&gt; Optional[dict]:
+        try:
+            response = self.table.get_item(Key={&#39;eventId&#39;: event_id})
+            return response.get(&#39;Item&#39;)
+        except ClientError as e:
+            raise Exception(f&#34;Failed to get event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)
+
+    def list_events(self, status_filter: Optional[str] = None) -&gt; List[dict]:
+        try:
+            if status_filter:
+                response = self.table.scan(
+                    FilterExpression=&#39;#status = :status&#39;,
+                    ExpressionAttributeNames={&#39;#status&#39;: &#39;status&#39;},
+                    ExpressionAttributeValues={&#39;:status&#39;: status_filter}
+                )
+            else:
+                response = self.table.scan()
+            return response.get(&#39;Items&#39;, [])
+        except ClientError as e:
+            raise Exception(f&#34;Failed to list events: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)
+
+    def update_event(self, event_id: str, update_data: dict) -&gt; Optional[dict]:
+        if not update_data:
+            return self.get_event(event_id)
+        
+        # Build update expression
+        update_expr = &#34;SET &#34; + &#34;, &#34;.join([f&#34;#{k} = :{k}&#34; for k in update_data.keys()])
+        expr_attr_names = {f&#34;#{k}&#34;: k for k in update_data.keys()}
+        expr_attr_values = {f&#34;:{k}&#34;: v for k, v in update_data.items()}
+        
+        try:
+            response = self.table.update_item(
+                Key={&#39;eventId&#39;: event_id},
+                UpdateExpression=update_expr,
+                ExpressionAttributeNames=expr_attr_names,
+                ExpressionAttributeValues=expr_attr_values,
+                ReturnValues=&#39;ALL_NEW&#39;
+            )
+            return response.get(&#39;Attributes&#39;)
+        except ClientError as e:
+            if e.response[&#39;Error&#39;][&#39;Code&#39;] == &#39;ValidationException&#39;:
+                return None
+            raise Exception(f&#34;Failed to update event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)
+
+    def delete_event(self, event_id: str) -&gt; bool:
+        try:
+            self.table.delete_item(Key={&#39;eventId&#39;: event_id})
+            return True
+        except ClientError as e:
+            raise Exception(f&#34;Failed to delete event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Methods</h3>
+<dl>
+<dt id="database.DynamoDBClient.create_event"><code class="name flex">
+<span>def <span class="ident">create_event</span></span>(<span>self, event_data: dict) ‑> dict</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_event(self, event_data: dict) -&gt; dict:
+    # Use provided eventId or generate new one
+    event_id = event_data.get(&#39;eventId&#39;) or str(uuid.uuid4())
+    item = {
+        &#39;eventId&#39;: event_id,
+        **{k: v for k, v in event_data.items() if k != &#39;eventId&#39;}
+    }
+    
+    try:
+        self.table.put_item(Item=item)
+        return item
+    except ClientError as e:
+        raise Exception(f&#34;Failed to create event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="database.DynamoDBClient.delete_event"><code class="name flex">
+<span>def <span class="ident">delete_event</span></span>(<span>self, event_id: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_event(self, event_id: str) -&gt; bool:
+    try:
+        self.table.delete_item(Key={&#39;eventId&#39;: event_id})
+        return True
+    except ClientError as e:
+        raise Exception(f&#34;Failed to delete event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="database.DynamoDBClient.get_event"><code class="name flex">
+<span>def <span class="ident">get_event</span></span>(<span>self, event_id: str) ‑> dict | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_event(self, event_id: str) -&gt; Optional[dict]:
+    try:
+        response = self.table.get_item(Key={&#39;eventId&#39;: event_id})
+        return response.get(&#39;Item&#39;)
+    except ClientError as e:
+        raise Exception(f&#34;Failed to get event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="database.DynamoDBClient.list_events"><code class="name flex">
+<span>def <span class="ident">list_events</span></span>(<span>self, status_filter: str | None = None) ‑> List[dict]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_events(self, status_filter: Optional[str] = None) -&gt; List[dict]:
+    try:
+        if status_filter:
+            response = self.table.scan(
+                FilterExpression=&#39;#status = :status&#39;,
+                ExpressionAttributeNames={&#39;#status&#39;: &#39;status&#39;},
+                ExpressionAttributeValues={&#39;:status&#39;: status_filter}
+            )
+        else:
+            response = self.table.scan()
+        return response.get(&#39;Items&#39;, [])
+    except ClientError as e:
+        raise Exception(f&#34;Failed to list events: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="database.DynamoDBClient.update_event"><code class="name flex">
+<span>def <span class="ident">update_event</span></span>(<span>self, event_id: str, update_data: dict) ‑> dict | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_event(self, event_id: str, update_data: dict) -&gt; Optional[dict]:
+    if not update_data:
+        return self.get_event(event_id)
+    
+    # Build update expression
+    update_expr = &#34;SET &#34; + &#34;, &#34;.join([f&#34;#{k} = :{k}&#34; for k in update_data.keys()])
+    expr_attr_names = {f&#34;#{k}&#34;: k for k in update_data.keys()}
+    expr_attr_values = {f&#34;:{k}&#34;: v for k, v in update_data.items()}
+    
+    try:
+        response = self.table.update_item(
+            Key={&#39;eventId&#39;: event_id},
+            UpdateExpression=update_expr,
+            ExpressionAttributeNames=expr_attr_names,
+            ExpressionAttributeValues=expr_attr_values,
+            ReturnValues=&#39;ALL_NEW&#39;
+        )
+        return response.get(&#39;Attributes&#39;)
+    except ClientError as e:
+        if e.response[&#39;Error&#39;][&#39;Code&#39;] == &#39;ValidationException&#39;:
+            return None
+        raise Exception(f&#34;Failed to update event: {e.response[&#39;Error&#39;][&#39;Message&#39;]}&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="database.DynamoDBClient" href="#database.DynamoDBClient">DynamoDBClient</a></code></h4>
+<ul class="">
+<li><code><a title="database.DynamoDBClient.create_event" href="#database.DynamoDBClient.create_event">create_event</a></code></li>
+<li><code><a title="database.DynamoDBClient.delete_event" href="#database.DynamoDBClient.delete_event">delete_event</a></code></li>
+<li><code><a title="database.DynamoDBClient.get_event" href="#database.DynamoDBClient.get_event">get_event</a></code></li>
+<li><code><a title="database.DynamoDBClient.list_events" href="#database.DynamoDBClient.list_events">list_events</a></code></li>
+<li><code><a title="database.DynamoDBClient.update_event" href="#database.DynamoDBClient.update_event">update_event</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
