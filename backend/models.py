@@ -12,6 +12,11 @@ class EventStatus(str, Enum):
     CANCELLED = "cancelled"
 
 
+class RegistrationStatus(str, Enum):
+    CONFIRMED = "confirmed"
+    WAITLISTED = "waitlisted"
+
+
 class EventBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     description: str = Field(..., min_length=1, max_length=1000)
@@ -20,6 +25,7 @@ class EventBase(BaseModel):
     capacity: int = Field(..., gt=0, le=100000)
     organizer: str = Field(..., min_length=1, max_length=100)
     status: EventStatus = EventStatus.ACTIVE
+    hasWaitlist: bool = Field(default=False)
 
     @field_validator('date')
     @classmethod
@@ -49,6 +55,7 @@ class EventUpdate(BaseModel):
     capacity: Optional[int] = Field(None, gt=0, le=100000)
     organizer: Optional[str] = Field(None, min_length=1, max_length=100)
     status: Optional[EventStatus] = None
+    hasWaitlist: Optional[bool] = None
 
     @field_validator('date')
     @classmethod
@@ -64,6 +71,55 @@ class EventUpdate(BaseModel):
 
 class Event(EventBase):
     eventId: str
+
+    class Config:
+        from_attributes = True
+
+
+# User Models
+
+class UserCreate(BaseModel):
+    userId: str = Field(..., min_length=1, max_length=100)
+    name: str = Field(..., min_length=1, max_length=200)
+
+    @field_validator('name')
+    @classmethod
+    def validate_name(cls, v: str) -> str:
+        if not v or v.strip() == '':
+            raise ValueError('Name cannot be empty or whitespace only')
+        return v
+
+
+class User(BaseModel):
+    userId: str
+    name: str
+
+    class Config:
+        from_attributes = True
+
+
+# Registration Models
+
+class RegistrationCreate(BaseModel):
+    userId: str
+    eventId: str
+
+
+class Registration(BaseModel):
+    userId: str
+    eventId: str
+    status: RegistrationStatus
+    registeredAt: str  # ISO timestamp
+
+    class Config:
+        from_attributes = True
+
+
+class UserRegistration(BaseModel):
+    eventId: str
+    eventTitle: str
+    status: RegistrationStatus
+    registeredAt: str
 
     class Config:
         from_attributes = True

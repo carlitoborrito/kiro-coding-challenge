@@ -1,18 +1,18 @@
 # Implementation Plan: User Registration System
 
-- [ ] 1. Extend data models for user registration
-- [ ] 1.1 Add User models to models.py
+- [x] 1. Extend data models for user registration
+- [x] 1.1 Add User models to models.py
   - Create UserCreate and User Pydantic models with validation
   - Add field validators for userId and name
   - _Requirements: 1.1, 1.2_
 
-- [ ] 1.2 Add Registration models to models.py
+- [x] 1.2 Add Registration models to models.py
   - Create RegistrationStatus enum (confirmed, waitlisted)
   - Create RegistrationCreate, Registration, and UserRegistration models
   - Add timestamp field with ISO format
   - _Requirements: 3.1, 3.3, 5.3_
 
-- [ ] 1.3 Enhance Event model with waitlist support
+- [x] 1.3 Enhance Event model with waitlist support
   - Add hasWaitlist boolean field to EventBase model
   - Update EventCreate and EventUpdate models
   - _Requirements: 2.2, 2.3_
