@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import Optional
 from datetime import datetime
 from enum import Enum
@@ -26,6 +26,14 @@ class EventBase(BaseModel):
     organizer: str = Field(..., min_length=1, max_length=100)
     status: EventStatus = EventStatus.ACTIVE
     hasWaitlist: bool = Field(default=False)
+    waitlistEnabled: Optional[bool] = Field(default=None, exclude=True)
+
+    @model_validator(mode='after')
+    def sync_waitlist_fields(self):
+        # Support both hasWaitlist and waitlistEnabled
+        if self.waitlistEnabled is not None:
+            self.hasWaitlist = self.waitlistEnabled
+        return self
 
     @field_validator('date')
     @classmethod
@@ -56,6 +64,14 @@ class EventUpdate(BaseModel):
     organizer: Optional[str] = Field(None, min_length=1, max_length=100)
     status: Optional[EventStatus] = None
     hasWaitlist: Optional[bool] = None
+    waitlistEnabled: Optional[bool] = Field(default=None, exclude=True)
+
+    @model_validator(mode='after')
+    def sync_waitlist_fields(self):
+        # Support both hasWaitlist and waitlistEnabled
+        if self.waitlistEnabled is not None:
+            self.hasWaitlist = self.waitlistEnabled
+        return self
 
     @field_validator('date')
     @classmethod
@@ -103,6 +119,11 @@ class User(BaseModel):
 class RegistrationCreate(BaseModel):
     userId: str
     eventId: str
+
+
+class EventRegistrationCreate(BaseModel):
+    """Registration model for event-specific endpoint (eventId comes from path)"""
+    userId: str
 
 
 class Registration(BaseModel):

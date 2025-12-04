@@ -25,6 +25,46 @@ class BackendStack(Stack):
             removal_policy=RemovalPolicy.DESTROY,  # Change to RETAIN for production
         )
         
+        # DynamoDB table for users
+        users_table = dynamodb.Table(
+            self, "UsersTable",
+            partition_key=dynamodb.Attribute(
+                name="userId",
+                type=dynamodb.AttributeType.STRING
+            ),
+            billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,
+            removal_policy=RemovalPolicy.DESTROY,  # Change to RETAIN for production
+        )
+        
+        # DynamoDB table for registrations
+        registrations_table = dynamodb.Table(
+            self, "RegistrationsTable",
+            partition_key=dynamodb.Attribute(
+                name="userId",
+                type=dynamodb.AttributeType.STRING
+            ),
+            sort_key=dynamodb.Attribute(
+                name="eventId",
+                type=dynamodb.AttributeType.STRING
+            ),
+            billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,
+            removal_policy=RemovalPolicy.DESTROY,  # Change to RETAIN for production
+        )
+        
+        # Add Global Secondary Index for querying registrations by event
+        registrations_table.add_global_secondary_index(
+            index_name="EventRegistrationsIndex",
+            partition_key=dynamodb.Attribute(
+                name="eventId",
+                type=dynamodb.AttributeType.STRING
+            ),
+            sort_key=dynamodb.Attribute(
+                name="registeredAt",
+                type=dynamodb.AttributeType.STRING
+            ),
+            projection_type=dynamodb.ProjectionType.ALL,
+        )
+        
         # Lambda function for FastAPI
         api_lambda = _lambda.DockerImageFunction(
             self, "EventsApiFunction",
@@ -37,12 +77,16 @@ class BackendStack(Stack):
             architecture=_lambda.Architecture.ARM_64,  # Match Docker image architecture
             environment={
                 "DYNAMODB_TABLE_NAME": events_table.table_name,
+                "USERS_TABLE_NAME": users_table.table_name,
+                "REGISTRATIONS_TABLE_NAME": registrations_table.table_name,
                 "CORS_ORIGINS": "*",  # Configure as needed
             }
         )
         
         # Grant Lambda permissions to access DynamoDB
         events_table.grant_read_write_data(api_lambda)
+        users_table.grant_read_write_data(api_lambda)
+        registrations_table.grant_read_write_data(api_lambda)
         
         # API Gateway REST API
         api = apigw.LambdaRestApi(

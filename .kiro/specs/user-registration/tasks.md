@@ -29,26 +29,26 @@
   - **Property 4: Event capacity configuration round-trip**
   - **Validates: Requirements 2.1, 2.2, 2.3, 2.4**
 
-- [ ] 2. Extend database client for user and registration operations
-- [ ] 2.1 Add user management methods to database.py
+- [x] 2. Extend database client for user and registration operations
+- [x] 2.1 Add user management methods to database.py
   - Implement create_user with conditional expression for uniqueness
   - Implement get_user method
   - Handle DynamoDB ClientError exceptions
   - _Requirements: 1.1, 1.3, 1.4_
 
-- [ ] 2.2 Add registration query methods to database.py
+- [x] 2.2 Add registration query methods to database.py
   - Implement get_registration method
   - Implement list_user_registrations method
   - Implement list_event_registrations with status filter
   - Implement count_confirmed_registrations method
   - _Requirements: 3.1, 5.1, 5.2_
 
-- [ ] 2.3 Add registration creation method to database.py
+- [x] 2.3 Add registration creation method to database.py
   - Implement create_registration with conditional expression to prevent duplicates
   - Include registeredAt timestamp generation
   - _Requirements: 3.1, 3.3, 3.4_
 
-- [ ] 2.4 Add registration deletion and promotion methods to database.py
+- [x] 2.4 Add registration deletion and promotion methods to database.py
   - Implement delete_registration method
   - Implement get_first_waitlisted_user method (query by registeredAt)
   - Implement update_registration_status method
@@ -58,8 +58,8 @@
   - **Property 3: Duplicate userId rejection**
   - **Validates: Requirements 1.3**
 
-- [ ] 3. Implement user management API endpoints
-- [ ] 3.1 Add POST /users endpoint to main.py
+- [x] 3. Implement user management API endpoints
+- [x] 3.1 Add POST /users endpoint to main.py
   - Validate user data with Pydantic
   - Call db_client.create_user
   - Handle duplicate userId errors (409 Conflict)
@@ -67,13 +67,13 @@
   - Return created user (201)
   - _Requirements: 1.1, 1.2, 1.3_
 
-- [ ] 3.2 Add GET /users/{userId} endpoint to main.py
+- [x] 3.2 Add GET /users/{userId} endpoint to main.py
   - Call db_client.get_user
   - Handle user not found (404)
   - Return user data
   - _Requirements: 1.4_
 
-- [ ]* 3.3 Write unit tests for user endpoints
+- [x] 3.3 Write unit tests for user endpoints
   - Test create user with valid data
   - Test create user with empty name
   - Test create user with duplicate userId
@@ -81,8 +81,8 @@
   - Test get non-existent user
   - _Requirements: 1.1, 1.2, 1.3, 1.4_
 
-- [ ] 4. Implement registration API endpoints
-- [ ] 4.1 Add POST /registrations endpoint to main.py
+- [x] 4. Implement registration API endpoints
+- [x] 4.1 Add POST /registrations endpoint to main.py
   - Validate registration data with Pydantic
   - Verify user exists (call get_user)
   - Verify event exists (call get_event)
@@ -119,7 +119,7 @@
   - **Property 10: Non-existent user registration rejection**
   - **Validates: Requirements 3.6**
 
-- [ ] 4.8 Add DELETE /registrations/{userId}/{eventId} endpoint to main.py
+- [x] 4.8 Add DELETE /registrations/{userId}/{eventId} endpoint to main.py
   - Verify registration exists (call get_registration)
   - Get registration status
   - Delete registration
@@ -149,7 +149,7 @@
   - **Property 15: Non-existent event unregistration rejection**
   - **Validates: Requirements 4.5**
 
-- [ ] 4.14 Add GET /users/{userId}/registrations endpoint to main.py
+- [x] 4.14 Add GET /users/{userId}/registrations endpoint to main.py
   - Verify user exists (call get_user)
   - Call db_client.list_user_registrations
   - For each registration, fetch event details
@@ -182,37 +182,37 @@
   - Test list registrations for non-existent user
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 4.1, 4.2, 4.3, 4.4, 4.5, 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 5. Update infrastructure for new DynamoDB tables
-- [ ] 5.1 Add Users table to backend_stack.py
+- [x] 5. Update infrastructure for new DynamoDB tables
+- [x] 5.1 Add Users table to backend_stack.py
   - Create DynamoDB table with userId as partition key
   - Configure on-demand billing
   - Grant Lambda function read/write permissions
   - _Requirements: 1.1_
 
-- [ ] 5.2 Add Registrations table to backend_stack.py
+- [x] 5.2 Add Registrations table to backend_stack.py
   - Create DynamoDB table with userId as partition key and eventId as sort key
   - Add Global Secondary Index (EventRegistrationsIndex) with eventId as partition key and registeredAt as sort key
   - Configure on-demand billing
   - Grant Lambda function read/write permissions
   - _Requirements: 3.1, 4.2_
 
-- [ ] 5.3 Update environment variables in backend_stack.py
+- [x] 5.3 Update environment variables in backend_stack.py
   - Add USERS_TABLE_NAME environment variable to Lambda
   - Add REGISTRATIONS_TABLE_NAME environment variable to Lambda
   - _Requirements: 1.1, 3.1_
 
-- [ ] 6. Checkpoint - Ensure all tests pass
+- [x] 6. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ]* 7. Write integration tests for end-to-end workflows
-- [ ]* 7.1 Write integration test for complete registration flow
+- [x] 7. Write integration tests for end-to-end workflows
+- [x] 7.1 Write integration test for complete registration flow
   - Create user, create event, register user, verify registration
   - _Requirements: 1.1, 2.1, 3.1_
 
-- [ ]* 7.2 Write integration test for waitlist promotion flow
+- [x] 7.2 Write integration test for waitlist promotion flow
   - Create users, create event at capacity with waitlist, register users, unregister confirmed user, verify promotion
   - _Requirements: 3.3, 4.2_
 
-- [ ]* 7.3 Write integration test for user viewing registrations
+- [x] 7.3 Write integration test for user viewing registrations
   - Create user, create multiple events, register for events, list registrations, verify all present
   - _Requirements: 5.1, 5.2, 5.3_
